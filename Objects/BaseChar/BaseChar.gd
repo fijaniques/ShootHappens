@@ -8,8 +8,8 @@ var vDir = Vector2.ZERO
 var velocity = Vector2.ZERO
 
 #COMBAT
-onready var gun = $Gun
-var bullet = preload("res://Objects/Attacks/BaseBullet/BaseBullet.tscn")
+export (PackedScene) var gun
+var gInstance
 var shield = preload("res://Objects/Shield/Shield.tscn")
 var sInstance
 
@@ -21,6 +21,7 @@ var team
 
 func _ready():
 	_set_team()
+	_add_gun()
 	_add_shield()
 
 func _physics_process(delta):
@@ -37,10 +38,6 @@ func _get_input():
 	elif(Input.is_action_just_released("space")):
 		_shield()
 
-func _unhandled_input(event):
-	if(Input.is_action_just_pressed("l_click")):
-		_shoot()
-
 func _movement(delta):
 	velocity.x = hDir * speed * delta
 	velocity.y = vDir * speed * delta
@@ -49,13 +46,7 @@ func _movement(delta):
 	velocity = velocity.normalized()
 
 func _aim():
-	gun.look_at(get_global_mouse_position())
-
-func _shoot():
-	var bInstance = bullet.instance()
-	bInstance.global_position = gun.get_node("GunPoint").global_position
-	bInstance.destination = (gun.get_node("GunPoint").global_position - global_position)
-	get_tree().current_scene.add_child(bInstance)
+	gInstance.look_at(get_global_mouse_position())
 
 func _shield():
 	if(!defending):
@@ -81,3 +72,9 @@ func _add_shield():
 	sInstance = shield.instance()
 	sInstance.team = team
 	add_child(sInstance)
+
+func _add_gun():
+	gInstance = gun.instance()
+	add_child(gInstance)
+	
+#	canAim = true
