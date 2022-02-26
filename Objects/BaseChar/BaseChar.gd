@@ -54,7 +54,7 @@ func _aim():
 func _shoot():
 	var bInstance = bullet.instance()
 	bInstance.global_position = gun.get_node("GunPoint").global_position
-	bInstance.destination = (gun.get_node("GunPoint").global_position - global_position) * 100000
+	bInstance.destination = (gun.get_node("GunPoint").global_position - global_position)
 	get_tree().current_scene.add_child(bInstance)
 
 func _shield():

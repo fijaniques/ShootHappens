@@ -73,6 +73,7 @@ space={
 2d_physics/layer_8="projectiles_three"
 2d_physics/layer_9="projectiles_four"
 2d_physics/layer_10="characters"
+2d_physics/layer_11="projectiles"
 
 [physics]
 
