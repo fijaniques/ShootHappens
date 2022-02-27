@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Character
+
 #MOVEMENT
 var speed :float = 10000
 var hDir = Vector2.ZERO
@@ -76,5 +78,6 @@ func _add_shield():
 func _add_gun():
 	gInstance = gun.instance()
 	add_child(gInstance)
-	
-#	canAim = true
+
+func _special():
+	pass

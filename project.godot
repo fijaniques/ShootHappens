@@ -8,6 +8,22 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Objects/BaseChar/BaseChar.gd"
+}, {
+"base": "Position2D",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://Objects/Gun/Gun.gd"
+} ]
+_global_script_class_icons={
+"Character": "",
+"Weapon": ""
+}
+
 [application]
 
 config/name="ShootHappens"
