@@ -2,11 +2,27 @@ extends Position2D
 
 class_name Weapon
 
+onready var rTimer = $Timers/Reload
+
 var bullet = preload("res://Objects/Attacks/BaseBullet/BaseBullet.tscn")
+export (int) var initialAmmo
+var ammo :int
+var reloading :bool = false
+
+
+func _ready():
+	ammo = initialAmmo
+
 
 func _unhandled_input(event):
 	if(Input.is_action_just_pressed("l_click")):
-		_shoot()
+		if(!reloading):
+			if(ammo > 0):
+				_shoot()
+				ammo -= 1
+			else:
+				_reload()
+
 
 func _shoot():
 	var bInstance = bullet.instance()
@@ -14,3 +30,12 @@ func _shoot():
 	bInstance.destination = $Destinations/D2.global_position - $GunPoint.global_position
 	get_tree().current_scene.add_child(bInstance)
 
+
+func _reload():
+	reloading = true
+	rTimer.start()
+
+
+func _on_Reload_timeout():
+	reloading = false
+	ammo = initialAmmo
