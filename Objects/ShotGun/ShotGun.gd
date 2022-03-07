@@ -1,5 +1,11 @@
 extends Weapon
 
+func _ready():
+	rTimer.wait_time = 1
+	initialAmmo = 2
+	ammo = initialAmmo
+
+
 func _shoot():
 	for d in $Destinations.get_child_count():
 		var bInstance = bullet.instance()

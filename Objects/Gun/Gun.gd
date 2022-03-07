@@ -5,12 +5,14 @@ class_name Weapon
 onready var rTimer = $Timers/Reload
 
 var bullet = preload("res://Objects/Attacks/BaseBullet/BaseBullet.tscn")
-export (int) var initialAmmo
-var ammo :int
+var initialAmmo :float
+var ammo :float
 var reloading :bool = false
 
 
 func _ready():
+	rTimer.wait_time = 0.5
+	initialAmmo = 2
 	ammo = initialAmmo
 
 
@@ -21,6 +23,7 @@ func _unhandled_input(event):
 				_shoot()
 				ammo -= 1
 			else:
+				reloading = true
 				_reload()
 
 
@@ -37,5 +40,6 @@ func _reload():
 
 
 func _on_Reload_timeout():
+	print("OK")
 	reloading = false
 	ammo = initialAmmo
